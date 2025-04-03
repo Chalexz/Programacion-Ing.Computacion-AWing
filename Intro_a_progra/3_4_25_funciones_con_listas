@@ -19,14 +19,14 @@ def menor(lista): #SIRVE
         if i < menor:
             menor = i 
     return menor
-
+'''
 def to_number(lista): #NO SIRVE
     listacorrida = []
     for i in lista: 
 
     listacorridastr = ""
     lista = str(lista)
-
+'''
 def descomponer(lista): #SIRVE
     listaPositivos = []
     listaNegativos = []
