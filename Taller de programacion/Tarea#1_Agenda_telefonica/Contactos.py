@@ -72,30 +72,46 @@ def fecha_valida(fecha):
 
 # agrega un nuevo contacto a la lista si todos los datos resuktan validos
 def agregar_contacto():
-    cedula = input("Cédula (9 dígitos): ")
-    if not cedula_valida(cedula):
-        print("Cédula inválida.")  # puede dar error por largo o por letras
-        return
-    contactos = cargar_contactos()
-    for c in contactos:
-        if c["cedula"] == cedula:  # no debe haber duplicados
-            print("Cédula ya existe.")
-            return
-    nombre = input("Nombre: ")
+    while True:
+        cedula = input("Cédula (9 dígitos): ")
+        if not cedula_valida(cedula):
+            print("Cédula inválida. Intente de nuevo.")
+            continue
+        contactos = cargar_contactos()
+        duplicado = False
+        for c in contactos:
+            if c["cedula"] == cedula:
+                print("Cédula ya existe. Intente con otra.")
+                duplicado = True
+                break
+        if duplicado:
+            continue
+        break  # si está bien y no duplicada, salimos del bucle
+
+    nombre = input("Nombre (Sin apellidos): ")
     apellidos = input("Apellidos: ")
-    sexo = input("Sexo (H/M): ")
-    if not sexo_valido(sexo):  # si mete otra letra, ya no sirve
-        print("Sexo inválido.")
-        return
-    telefono = input("Teléfono (8 dígitos): ")
-    if not telefono_valido(telefono):  # muy corto, largo o letras
-        print("Teléfono inválido.")
-        return
-    fecha = input("Fecha de nacimiento (DD/MM/YYYY): ")
-    if not fecha_valida(fecha):
-        print("Fecha inválida.")  # por ejemplo si falta una parte
-        return
-    # si todo salió bien, se agrega a la lista
+
+    while True:
+        sexo = input("Sexo (H/M): ")
+        if sexo_valido(sexo):
+            break
+        else:
+            print("Sexo inválido. Solo se permite H o M.")
+
+    while True:
+        telefono = input("Teléfono (8 dígitos): ")
+        if telefono_valido(telefono):
+            break
+        else:
+            print("Teléfono inválido. Debe tener 8 dígitos numéricos.")
+
+    while True:
+        fecha = input("Fecha de nacimiento (DD/MM/YYYY): ")
+        if fecha_valida(fecha):
+            break
+        else:
+            print("Fecha inválida. Formato correcto: DD/MM/YYYY.")
+
     contactos.append({
         "cedula": cedula,
         "nombre": nombre,
@@ -104,8 +120,10 @@ def agregar_contacto():
         "telefono": telefono,
         "fecha": fecha
     })
+
     guardar_contactos(contactos)
-    print("Contacto agregado.")  # mensaje de confirmación de q se agregó el contacto
+    print("Contacto agregado.")
+
 
 # busca y elimina un contacto por su cédula si el usuario confirma
 def borrar_contacto():
@@ -192,40 +210,92 @@ def total_contactos():
     total = contar_lineas()
     print(f"Total de contactos: {total}")  # si no hay archivo, muestra 0
 
+def limpiar_pantalla(): #ayuda demasiado a mantener el orden y comprensión de lo uqe está psaando en la terminal1
+    import os
+    os.system("cls" if os.name == "nt" else "clear")
+
+def menu_registro():
+    while True:
+        limpiar_pantalla()
+        print("\n" + "=" * 50)
+        print("Registro de Contacto")
+        print("=" * 50)
+        print("11. Registrar contacto")
+        print("12. Borrar contacto")
+        print("13. Modificar contacto")
+        print("14. Ver todos los contactos")
+        print("15. Retornar")
+        print("=" * 50)
+        opcion = input("Digite una opción: ")
+        if opcion == "11":
+            limpiar_pantalla()
+            agregar_contacto()
+        elif opcion == "12":
+            limpiar_pantalla()
+            borrar_contacto()
+        elif opcion == "13":
+            limpiar_pantalla()
+            modificar_contacto()
+        elif opcion == "14":
+            limpiar_pantalla()
+            ver_contactos()
+            input("\nPresione Enter para continuar...")
+        elif opcion == "15":
+            break
+        else:
+            print("Opción no válida.")
+            input("Presione Enter para continuar...")
+
+def menu_busqueda():
+    while True:
+        limpiar_pantalla()
+        print("\n" + "=" * 50)
+        print("Búsquedas")
+        print("=" * 50)
+        print("21. Buscar por nombre")
+        print("22. Buscar por teléfono")
+        print("23. Retornar")
+        print("=" * 50)
+        opcion = input("Digite una opción: ")
+        if opcion == "21":
+            limpiar_pantalla()
+            buscar_nombre()
+            input("\nPresione Enter para continuar...")
+        elif opcion == "22":
+            limpiar_pantalla()
+            buscar_telefono()
+            input("\nPresione Enter para continuar...")
+        elif opcion == "23":
+            break
+        else:
+            print("Opción no válida.")
+            input("Presione Enter para continuar...")
 # menú principal que permite elegir opciones hasta que se decida salir
 def menu():
     while True:
+        limpiar_pantalla()
         print("\n" + "="*50)
-        print("\nAGENDA TELEFÓNICA")
-        print("1. Registrar contacto")
-        print("2. Borrar contacto")
-        print("3. Modificar contacto")
-        print("4. Ver todos los contactos")
-        print("5. Buscar por nombre")
-        print("6. Buscar por teléfono")
-        print("7. Total de contactos")
-        print("9. Salir")
-        print("\n" + "="*50)  # una super forma que vi de meterle enriquecimiento visual en vez de hacer un "print("\n======================\n")"
-        opcion = input("Seleccione una opción: ")
+        print("\n - BIENVENIDO(A) A AGENDA ALEXFÓNICA -")
+        print("\n" + "="*50)
+        print("1: Registro de Contacto")
+        print("2: Búsquedas")
+        print("3: Total contactos")
+        print("9: Salir")
+        print("="*50)  # una super forma que vi de meterle enriquecimiento visual en vez de hacer un "print("\n======================\n")"
+        opcion = input("Ingrese la opción deseada: ")
         if opcion == "1":
-            agregar_contacto()
+            menu_registro()
         elif opcion == "2":
-            borrar_contacto()
+            menu_busqueda()
         elif opcion == "3":
-            modificar_contacto()
-        elif opcion == "4":
-            ver_contactos()
-        elif opcion == "5":
-            buscar_nombre()
-        elif opcion == "6":
-            buscar_telefono()
-        elif opcion == "7":
+            limpiar_pantalla()
             total_contactos()
+            input("\nPresione Enter para continuar...")
         elif opcion == "9":
-            print("Saliendo...")  # termina el bucle del menú
+            print("Saliendo...")
             break
         else:
-            print("Opción no válida.")  # si elige algo fuera del menú, lo avisa
-
+            print("Opción no válida.")
+            input("Presione Enter para continuar...")
 # ejecuta la func menu para comenzar 
 menu()
