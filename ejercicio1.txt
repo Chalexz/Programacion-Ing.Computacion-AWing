@@ -1,0 +1,7 @@
+lunes, comida, 20000
+lunes, gasolina, 5000
+martes, comida, 15000
+martes, comida, 3500
+miércoles, servicios, 4000
+jueves, comida, 8500.5
+jueves, gasolina, 10000
