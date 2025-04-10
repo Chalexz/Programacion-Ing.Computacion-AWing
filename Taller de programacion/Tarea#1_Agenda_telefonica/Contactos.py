@@ -7,9 +7,14 @@ Profesor: Ing. Cristian Campos Agüero
 
 por: Alexander Wing Rojas
 
+
+ENTRADAS: cédula, nombre, apellidos, sexo, teléfono, fecha de nacimiento, opciones de menú, confirmaciones (s/n)
+SALIDAS:mensajes informativos y de error, contactos mostrados (en búsqueda o vista general), confirmaciones de acciones (agregado, modificado, eliminado), total de contactos registrados
+RESTRICCIONES:  cédula única de 9 dígitos numéricos, teléfono de 8 dígitos numéricos, sexo solo “H” o “M”, fecha con formato exacto DD/MM/YYYY, Contactos.txt debe estar en el mismo directorio, 
+no se permiten campos vacíos en búsqueda, sin validación de fechas reales, consola como única interfaz, sin cifrado de datos.
 '''
 
-def contar(texto): # func para contar caracteres sin usar el malvado len
+def contar(texto): # func para contar caracteres sin usar el malvado le
     contador = 0
     for _ in texto:
         contador += 1
@@ -175,7 +180,7 @@ def modificar_contacto():
         guardar_contactos(contactos)
         print("Contacto modificado.")
     else:
-        print("Contacto no encontrado.")  # quizás escribio mal la cédula
+        print("Contacto no encontrado.") 
 
 # muestra todos los contactos del archivo uno por uno
 def ver_contactos():
@@ -214,9 +219,9 @@ def limpiar_pantalla(): #ayuda demasiado a mantener el orden y comprensión de l
     import os
     os.system("cls" if os.name == "nt" else "clear")
 
-def menu_registro():
+def menu_registro(): #menu al seleccionar 
     while True:
-        limpiar_pantalla()
+        limpiar_pantalla() #se aplica limpiarpantalla acá y en cada inicio de un menú nuevo
         print("\n" + "=" * 50)
         print("Registro de Contacto")
         print("=" * 50)
