@@ -1,0 +1,3 @@
+1,¿Capital de Costa Rica?,Alajuela,Cartago,Heredia,San José,4
+2,¿Moneda de Costa Rica?,Dólar,Euro,Colón,Peso,3
+3,¿Color central de la bandera de CR?,Azul,Rojo,Verde,Blanco,2
