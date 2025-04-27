@@ -2,12 +2,12 @@
 Hecha por Alexander Wing
 Taller de programación 2025 1er semestre 
 '''
+import os
+import sys
+os.chdir(os.path.dirname(os.path.abspath(sys.argv[0]))) #cambio el directorio del trabajo al del archivo actual para que cuando se ejecute, siempre pueda encontrar la carpeta "data/""
 import jugador
 import admin
-import os
-
-def limpiar_pantalla():
-    os.system('cls' if os.name == 'nt' else 'clear') #forma de limpiar la terminal sin importar el os de quien lo corra | Cuestión visual xfa no me quiten puntos por esto
+from utilidades import limpiar_pantalla
 
 def menu_principal():
     while True:

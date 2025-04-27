@@ -97,4 +97,4 @@
 97,¿Quién escribió "Frankenstein"?,Shelley,Brontë,Austen,Woolf,1
 98,¿Cuál es el animal más ruidoso del mundo?,Elefante,Mono aullador,Cachalote,Grillo,3
 99,¿Qué planeta tiene los vientos más fuertes?,Neptuno,Júpiter,Saturno,Urano,1
-100,¿Quién pintó "Guernica"?,Picasso,Dalí,Van Gogh,Miró,1
+100,¿Quién pintó "Guernica"?,Picasso,Dalí,Van Gogh,Miró,1101,jasidjasdoajsd,a,a,a,3
