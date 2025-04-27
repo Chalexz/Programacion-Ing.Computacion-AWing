@@ -1,4 +1,4 @@
-'''                        CÓDIGO DE QUIÉN QUIERE SER MILLONARIO VERSION PRECARIA
+'''                        CÓDIGO DE QUIÉN QUIERE SER MILLONARIO VERSIÓN PRECARISTA
 Hecha por Alexander Wing
 Taller de programación 2025 1er semestre 
 '''
