@@ -18,6 +18,7 @@ def menu_principal():
         print("\n1. Opciones Administrativas")
         print("2. Jugar")
         print("3. Salir")
+        print("4. Simular partida ganadora (pruebas)")
         
         opcion = input("\nSeleccione una opción: ")
         
@@ -34,6 +35,8 @@ def menu_principal():
                     "\nGracias por jugar, ojalá le haya gustado!" \
                     "\n""\n""\n=========================================""\n""\n")
             break
+        elif opcion == "4":
+            jugador.simular_ganador()
         else:
             print("\nOpción incorrecta. Hágalo otra vez")
 

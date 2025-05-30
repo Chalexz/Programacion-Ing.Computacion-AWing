@@ -1,0 +1,16 @@
+1,2025-04-26,21:39:18
+56,¿Qué país inventó el ajedrez?,India,China,Persia,Egipto,1
+39,¿Qué científico descubrió la penicilina?,Pasteur,Fleming,Curie,Einstein,2
+40,¿Cuál es el mamífero más grande del mundo?,Elefante,Ballena azul,Jirafa,Rinoceronte,2
+41,¿Qué planeta es conocido como "el gigante gaseoso"?,Venus,Marte,Júpiter,Plutón,3
+42,¿Quién escribió "Hamlet"?,Dante,Shakespeare,Cervantes,Hemingway,2
+43,¿Cuál es el país con más islas del mundo?,Filipinas,Indonesia,Suecia,Japón,3
+44,¿Qué artista pintó "El grito"?,Van Gogh,Picasso,Munch,Dalí,3
+45,¿Cuántos corazones tiene un pulpo?,1,2,3,4,3
+46,¿Qué país inventó el papel?,China,Japón,Egipto,Grecia,1
+1,¿Cuál es el río más largo del mundo?,Nilo,Amazonas,Misisipi,Yangtsé,2
+2,¿En qué año llegó el hombre a la Luna?,1967,1969,1971,1973,2
+3,¿Qué artista pintó "La noche estrellada"?,Picasso,Van Gogh,Dalí,Monet,2
+4,¿Cuál es el metal más caro del mundo?,Oro,Platino,Plata,Rodio,4
+5,¿Qué país tiene forma de bota?,Francia,Italia,España,Portugal,2
+6,¿Cuántos huesos tiene el cuerpo humano adulto?,206,300,150,412,1

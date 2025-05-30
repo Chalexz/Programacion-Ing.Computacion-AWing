@@ -172,6 +172,24 @@ def jugar():
     with open("data/HistorialJuegos.txt", "a", encoding="utf-8") as f:
         f.write(f"{cedula},{nombre},{sexo},{aciertos},{premios[aciertos-1]*1000 if aciertos > 0 else 0},{archivo_juego},{fecha_inicio},{hora_inicio},{fecha_fin},{hora_fin}\n")
 
-    print(f"\nJuego terminado. Acertaste {aciertos} preguntas.")
+    print(f"\nJuego terminado. Pegó {aciertos} preguntas")
     print(f"Premio final: ₡{premios[aciertos-1]*1000 if aciertos > 0 else 0:,}")
+    input("\nPresione Enter para volver al menú...")
+
+def simular_ganador():
+    from datetime import datetime
+    cedula = input("\nCédula (9 dígitos): ")
+    nombre = input("Nombre completo: ")
+    sexo = input("Sexo (Hombre/Mujer): ")
+    aciertos = 15
+    premios = [100, 200, 300, 400, 500, 1000, 2000, 2500, 4000, 5000, 7000, 8500, 9500, 12000, 15000]
+    fecha_inicio = datetime.now().strftime("%Y-%m-%d")
+    hora_inicio = datetime.now().strftime("%H:%M:%S")
+    fecha_fin = fecha_inicio
+    hora_fin = datetime.now().strftime("%H:%M:%S")
+    archivo_juego = "Preguntas.txt"
+    with open("data/HistorialJuegos.txt", "a", encoding="utf-8") as f:
+        f.write(f"{cedula},{nombre},{sexo},{aciertos},{premios[aciertos-1]*1000},{archivo_juego},{fecha_inicio},{hora_inicio},{fecha_fin},{hora_fin}\n")
+    print(f"\nJuego terminado. Pegó 15 preguntas")
+    print(f"Premio final: ₡{premios[14]*1000:,}")
     input("\nPresione Enter para volver al menú...")
