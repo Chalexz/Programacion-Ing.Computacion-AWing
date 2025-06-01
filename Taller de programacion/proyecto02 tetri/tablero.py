@@ -3,22 +3,49 @@
 from precario_utils import range_precario
 
 def crear_tablero():
-    filas = 22
-    columnas = 12
+    """
+    Crea el tablero con bordes y obstáculo central.
+    """
+
     tablero = []
-    for i in range_precario(0, filas):
+
+    filas = 22
+
+    columnas = 12
+
+    f = 0
+    while f < filas:
         fila = []
-        for j in range_precario(0, columnas):
-            if i == 0 or i == filas - 1 or j == 0 or j == columnas - 1:
+        c = 0
+        while c < columnas:
+            if f == 0 or f == filas - 1 or c == 0 or c == columnas - 1:
                 fila += ["+"]
+
+            # Obstáculo central (como en el ejemplo del enunciado)
+            elif (f == 6 and (c == 5 or c == 6)):
+                fila += ["+"]
+
             else:
                 fila += ["0"]
+            c = c + 1
         tablero += [fila]
+        f = f + 1
     return tablero
 
+
+
 def imprimir_tablero(tablero):
-    for fila in tablero:
+    """
+    Imprime el tablero en consola.
+    """
+
+    i = 0
+    while i < range_precario(0, len(tablero)):
+        fila = tablero[i]
         txt = ""
-        for celda in fila:
-            txt += str(celda) + " "
+        j = 0
+        while j < range_precario(0, len(fila)):
+            txt = txt + str(fila[j]) + " "
+            j = j + 1
         print(txt)
+        i = i + 1

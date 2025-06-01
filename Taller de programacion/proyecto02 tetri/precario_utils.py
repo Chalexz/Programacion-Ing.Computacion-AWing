@@ -1,5 +1,7 @@
 # precario_utils.py
 
+import time
+
 def len_precario(lista):
     contador = 0
     for _ in lista:
@@ -22,3 +24,9 @@ def copiar_matriz(matriz):
             nueva += [val]
         copia += [nueva]
     return copia
+
+def random_precario(lista): #entiendo que sí se puede usar .time porque de alguna forma había que hacer un random pseudoaleatorio casero
+    total = len_precario(lista)
+    semilla = int(time.time() * 1000) % 10000
+    posicion = semilla % total
+    return lista[posicion]

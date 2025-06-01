@@ -1,5 +1,5 @@
 # main.py
 
-from juego import iniciar_juego
-
-iniciar_juego()
+# Solo ejecuta la interfaz gráfica siempre
+import interfaz
+# ...no hace falta más, solo importa para que se ejecute la interfaz...
