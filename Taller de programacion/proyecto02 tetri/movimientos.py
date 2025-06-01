@@ -38,23 +38,57 @@ def colocar_pieza(tablero, pieza, fila_inicio, col_inicio):
 
 def eliminar_lineas_completas(tablero):
     """
-    Si una fila empieza y termina con '+' y NO tiene ningún '0' en el medio,
-    entonces esa fila está llena y debe ser limpiada (solo los bordes quedan '+').
-    Devuelve (nuevo_tablero, puntos).
+    Elimina la(s) línea(s) llena(s) y baja las filas superiores una posición.
+    Una línea se considera llena si:
+    - Empieza y termina con '+'
+    - Todas las celdas internas (1 a -2) NO son '0' NI '+'
+    - No es una fila de solo '+'
     """
     nuevas_filas = []
     puntos = 0
-    for fila in tablero:
+    filas = len_precario(tablero)
+    columnas = len_precario(tablero[0])
+    i = filas - 1
+    while i >= 0:
+        fila = tablero[i]
         if fila[0] == "+" and fila[len_precario(fila)-1] == "+":
+            # Verifica que no sea una fila compuesta solo de '+'
+            solo_pared = True
+            for k in range_precario(1, len_precario(fila)-1):
+                if fila[k] != "+":
+                    solo_pared = False
+            if solo_pared:
+                nuevas_filas = [fila] + nuevas_filas
+                i -= 1
+                continue
+            # Verifica si está llena (sin ningún "0" ni "+")
             llena = True
             for k in range_precario(1, len_precario(fila)-1):
-                if fila[k] == "0":
+                if fila[k] == "0" or fila[k] == "+":
                     llena = False
             if llena:
-                nueva = []
-                for k in range_precario(0, len_precario(fila)):
-                    if k == 0 or k == len_precario(fila)-1:
-                        nueva += ["+"]
+                # Línea llena: la de arriba baja aquí, y así sucesivamente
+                puntos += 100
+                # Bajar todas las filas de arriba una posición
+                for j in range(i-1, -1, -1):
+                    fila_arriba = tablero[j]
+                    nuevas_filas = [fila_arriba] + nuevas_filas
+                # Agrega la fila vacía arriba
+                nueva = ["+"]
+
+                for _ in range_precario(1, len_precario(fila)-1):
+                    nueva += ["0"]
+                nueva += ["+"]
+
+                while len(nuevas_filas) < filas:
+                    nuevas_filas = [nueva] + nuevas_filas
+                return nuevas_filas, puntos
+            else:
+                nuevas_filas = [fila] + nuevas_filas
+        else:
+            nuevas_filas = [fila] + nuevas_filas
+        i -= 1
+    return nuevas_filas, puntos
 
 def rotar_pieza(pieza):
     filas = len_precario(pieza)

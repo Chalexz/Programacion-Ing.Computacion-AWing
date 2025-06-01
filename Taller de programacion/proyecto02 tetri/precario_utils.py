@@ -30,3 +30,10 @@ def random_precario(lista): #entiendo que sí se puede usar .time porque de algu
     semilla = int(time.time() * 1000) % 10000
     posicion = semilla % total
     return lista[posicion]
+
+def append_precario(lista, elemento):
+    """
+    Agrega un elemento al final de una lista (versión precaria de append).
+    """
+    lista += [elemento]
+    return lista
