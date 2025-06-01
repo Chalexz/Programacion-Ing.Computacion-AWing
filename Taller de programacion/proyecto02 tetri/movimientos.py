@@ -57,7 +57,7 @@ def eliminar_lineas_completas(tablero):
             for k in range_precario(1, len_precario(fila)-1):
                 if fila[k] != "+":
                     solo_pared = False
-            if solo_pared:
+            if solo_pared and (i == 0 or i == filas - 1):
                 nuevas_filas = [fila] + nuevas_filas
                 i -= 1
                 continue
@@ -67,22 +67,14 @@ def eliminar_lineas_completas(tablero):
                 if fila[k] == "0" or fila[k] == "+":
                     llena = False
             if llena:
-                # Línea llena: la de arriba baja aquí, y así sucesivamente
-                puntos += 100
-                # Bajar todas las filas de arriba una posición
-                for j in range(i-1, -1, -1):
-                    fila_arriba = tablero[j]
-                    nuevas_filas = [fila_arriba] + nuevas_filas
-                # Agrega la fila vacía arriba
                 nueva = ["+"]
 
                 for _ in range_precario(1, len_precario(fila)-1):
                     nueva += ["0"]
                 nueva += ["+"]
 
-                while len(nuevas_filas) < filas:
-                    nuevas_filas = [nueva] + nuevas_filas
-                return nuevas_filas, puntos
+                nuevas_filas = [nueva] + nuevas_filas
+                puntos += 100
             else:
                 nuevas_filas = [fila] + nuevas_filas
         else:
