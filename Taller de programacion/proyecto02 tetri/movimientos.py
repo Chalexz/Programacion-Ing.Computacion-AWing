@@ -48,8 +48,8 @@ def eliminar_lineas_completas(tablero):
     puntos = 0
     filas = len_precario(tablero)
     columnas = len_precario(tablero[0])
-    i = filas - 1
-    while i >= 0:
+    i = filas - 2
+    while i > 0:
         fila = tablero[i]
         if fila[0] == "+" and fila[len_precario(fila)-1] == "+":
             # Verifica que no sea una fila compuesta solo de '+'
@@ -57,8 +57,7 @@ def eliminar_lineas_completas(tablero):
             for k in range_precario(1, len_precario(fila)-1):
                 if fila[k] != "+":
                     solo_pared = False
-            if solo_pared and (i == 0 or i == filas - 1):
-                nuevas_filas = [fila] + nuevas_filas
+            if solo_pared:
                 i -= 1
                 continue
             # Verifica si está llena (sin ningún "0" ni "+")
@@ -67,20 +66,22 @@ def eliminar_lineas_completas(tablero):
                 if fila[k] == "0" or fila[k] == "+":
                     llena = False
             if llena:
-                nueva = ["+"]
-
-                for _ in range_precario(1, len_precario(fila)-1):
-                    nueva += ["0"]
-                nueva += ["+"]
-
-                nuevas_filas = [nueva] + nuevas_filas
                 puntos += 100
-            else:
-                nuevas_filas = [fila] + nuevas_filas
-        else:
-            nuevas_filas = [fila] + nuevas_filas
+                j = i
+                while j > 1:
+                    k = 1
+                    while k < columnas - 1:
+                        tablero[j][k] = tablero[j-1][k]
+                        k = k + 1
+                    j = j - 1
+                k = 1
+                while k < columnas - 1:
+                    tablero[1][k] = "0"
+                    k = k + 1
+                # No bajar i porque la fila que bajó puede estar llena también
+                continue
         i -= 1
-    return nuevas_filas, puntos
+    return tablero, puntos
 
 def rotar_pieza(pieza):
     filas = len_precario(pieza)
