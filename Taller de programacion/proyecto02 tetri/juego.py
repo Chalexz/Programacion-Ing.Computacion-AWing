@@ -7,9 +7,6 @@ from movimientos import colocar_pieza, puede_colocar, eliminar_lineas_completas,
 from precario_utils import len_precario, random_precario, range_precario
 
 def iniciar_juego():
-    """
-    Inicia el juego de Tetris en consola.
-    """
     print("Bienvenudo a TetrisKInter")
 
     tablero = crear_tablero()
@@ -39,14 +36,17 @@ def iniciar_juego():
             while i < len_precario(pieza):
                 j = 0
                 while j < len_precario(pieza[0]):
+                    
                     if pieza[i][j] == 1:
                         tablero[fila + i][col + j] = "0"
                     j = j + 1
+
                 i = i + 1
 
             if movimiento == "a":
                 if puede_colocar(tablero, pieza, fila, col - 1):
                     col = col - 1
+                    
             elif movimiento == "d":
                 if puede_colocar(tablero, pieza, fila, col + 1):
                     col = col + 1
@@ -55,8 +55,10 @@ def iniciar_juego():
                     fila = fila + 1
             elif movimiento == "w":
                 rotada = rotar_pieza(pieza)
+
                 if puede_colocar(tablero, rotada, fila, col):
                     pieza = rotada
+
             elif movimiento == "x":
                 break
 
@@ -65,4 +67,5 @@ def iniciar_juego():
 
         tablero, ganados = eliminar_lineas_completas(tablero)
         puntos = puntos + ganados
+        
         print("Puntos:", puntos)

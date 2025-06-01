@@ -1,5 +1,3 @@
-# precario_utils.py
-
 import time
 
 def len_precario(lista):
@@ -32,8 +30,29 @@ def random_precario(lista): #entiendo que sí se puede usar .time porque de algu
     return lista[posicion]
 
 def append_precario(lista, elemento):
-    """
-    Agrega un elemento al final de una lista (versión precaria de append).
-    """
+
     lista += [elemento]
     return lista
+
+'''
+e: lista a la que se le quiere quitar el último elemento
+s: el elemento eliminado (o None si está vacía)
+r:
+'''
+def precario_pop(lista):
+
+    if len_precario(lista) == 0:
+        return None
+    ultimo = lista[len_precario(lista)-1]
+    nueva = []
+    i = 0
+    while i < len_precario(lista)-1:
+        nueva += [lista[i]]
+        i = i + 1
+    i = 0
+    while i < len_precario(nueva):
+        lista[i] = nueva[i]
+        i = i + 1
+    while len_precario(lista) > len_precario(nueva):
+        del lista[-1]
+    return ultimo

@@ -1,35 +1,36 @@
-# archivo.py
+from precario_utils import len_precario 
+
 
 def guardar_tablero(nombre_archivo, tablero):
-    """
-    Guarda el tablero en un archivo de texto.
-    """
+
     archivo = open(nombre_archivo, "w")
     i = 0
-    while i < len(tablero):
+    while i < len_precario(tablero):
         fila = tablero[i]
         linea = ""
         j = 0
-        while j < len(fila):
+
+
+        while j < len_precario(fila):
             linea = linea + str(fila[j])
             j = j + 1
         archivo.write(linea + "\n")
         i = i + 1
+
     archivo.close()
 
 def cargar_tablero(nombre_archivo):
-    """
-    Carga el tablero desde un archivo de texto.
-    """
     archivo = open(nombre_archivo, "r")
+    
     lineas = archivo.readlines()
     tablero = []
     i = 0
-    while i < len(lineas):
+    while i < len_precario(lineas):
         linea = lineas[i]
+
         fila = []
         j = 0
-        while j < len(linea.strip()):
+        while j < len_precario(linea.strip()):
             fila += [linea.strip()[j]]
             j = j + 1
         tablero += [fila]
