@@ -1,0 +1,5 @@
+1;COVID-19;2;18
+2;Fiebre Amarilla;1;9
+3;Influenza;1;6
+4;Tétanos;1;12
+5;Hepatitis A;2;1
