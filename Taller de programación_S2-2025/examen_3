@@ -1,0 +1,18 @@
+'''
+Por Alexander Wing
+Hecho el 29 de octubre
+
+EXAMEN 3 DE TALLER DE PROGRA - S2 2025
+'''
+
+
+# Escriba una función en Python llamada diferencia_pares() que reciba como entrada una lista y un número K. La función debe retornar una lista con sublistas donde se encuentren todos los pares ordenados cuya diferencia exacta sea igual a K. Ejemplos del comportamiento de la función.
+
+def diferencia_pares(lista,k):
+    pass
+
+
+def intercambiar_impares(lista1,lista2):
+    pass
+def diferencia_cuadrantes(M):
+    pass
