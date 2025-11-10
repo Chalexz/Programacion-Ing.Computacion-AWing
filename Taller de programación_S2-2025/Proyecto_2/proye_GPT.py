@@ -1,33 +1,35 @@
-# PROYECTO SUPER HERMANO MAURICIO | S2-2025
-# Viewport 8x10, Mario grande, ranking, goombas, hongo verde, estrella con temporizador
+'''
+PROYECTO SUPER HERMANO MAURICIO
+
+TALLER DE PROGRAMACION | S2-2025
+
+POR: ALEXANDER WING
+
+╭∩╮(-_-)╭∩╮
+'''
 
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 import os, time, random
-
-# ====== rutas (sin pathlib) ======
-BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR   = os.path.join(BASE_DIR, "assets")
-MAPAS_FILE   = os.path.join(BASE_DIR, "mapas.txt")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+MAPAS_FILE = os.path.join(BASE_DIR, "mapas.txt")
 RANKING_FILE = os.path.join(BASE_DIR, "ranking.txt")
 
-# ====== pillow opcional ======
 try:
     from PIL import Image, ImageTk
     _PIL_OK = True
 except Exception:
     _PIL_OK = False
 
-# ====== tablero y viewport ======
 FILAS = 16
 COLS  = 20
-TILE  = 48         # casilla grande (sprites se escalan)
+TILE  = 48
 VIEW_F = 8
 VIEW_C = 10
-ANCHO  = VIEW_C * TILE
-ALTO   = VIEW_F * TILE
+ANCHO = VIEW_C * TILE
+ALTO= VIEW_F * TILE
 
-# ====== estado global ======
 root = tk.Tk()
 root.title("SUPER HERMANO MAURICIO")
 
@@ -60,7 +62,6 @@ btn_volver_menu   = tk.Button(panel, text="Volver al menú",          command=la
 for b in (btn_activar_verde, btn_reiniciar, btn_abandonar, btn_volver_menu):
     b.pack(pady=6)
 
-# variables de partida
 matriz = []
 pos_mario = [0,0]
 goombas = []
@@ -69,14 +70,12 @@ rojos_tomados = 0
 verdes_stock = 0
 verde_activo = False
 estrella_hasta_ms = 0
-estrella_flag = False   # <-- estrella solo si se recogió la celda 4
+estrella_flag = False
 movimientos = 0
 
-# viewport
 view_r0 = 0
 view_c0 = 0
 
-# control ciclo
 modo = "normal"
 inicio_ms = 0
 limite_seg = 180
@@ -85,7 +84,6 @@ goomba_id = None
 estrella_tick_id = None
 juego_activo = False
 
-# ====== sprites ======
 SPRITES = {}
 SPRITES_REQUERIDOS = {
     "ground":      "ground",
@@ -101,7 +99,6 @@ SPRITES_REQUERIDOS = {
     "goomba":      "goomba",
 }
 
-# --------------------------------------------------------------------------------------
 '''
 entrada: nombre base
 salida: ruta o none
@@ -175,13 +172,12 @@ def cargar_todos_los_sprites_obligatorios():
         if img is None: faltan.append(f"{base}.png/.gif")
         SPRITES[k] = img
     if faltan:
-        messagebox.showerror("Faltan sprites",
-            "No se encontraron estos archivos en /assets:\n\n" +
+        messagebox.showerror("Faltan sprites!!",
+            "Mal. No se encontraron estos archivos en /assets:\n\n" +
             "\n".join(faltan))
         return False
     return True
 
-# --------------------------------------------------------------------------------------
 '''
 entrada: nada
 salida: ms actuales
@@ -306,14 +302,14 @@ objetivo: elegir modo de juego
 '''
 def abrir_selector_modo():
     sel = tk.Toplevel(root)
-    sel.title("Elegir modo de juego")
+    sel.title("Elija modo de juego")
     sel.resizable(False, False)
     sel.transient(root); sel.grab_set()
 
     marco = tk.Frame(sel, bg="#111")
     marco.pack(padx=16, pady=16)
 
-    tk.Label(marco, text="Seleccione el modo", fg="white", bg="#111",
+    tk.Label(marco, text="Seleccione el modo, porfavo", fg="white", bg="#111",
              font=("Arial", 13, "bold")).pack(pady=(0,10))
 
     tk.Button(marco, text="MODO NORMAL",
@@ -322,7 +318,7 @@ def abrir_selector_modo():
               command=lambda: elegir_modo("normal", sel)
               ).pack(pady=6)
 
-    tk.Button(marco, text="MODO CONTRATIEMPO (3 min)",
+    tk.Button(marco, text="MODO CONTRATIEMPO (3min)",
               width=24, bg="#3A3636", fg="white",
               activebackground="#4B4747", activeforeground="white",
               command=lambda: elegir_modo("contratiempo", sel)
@@ -357,10 +353,10 @@ def preparar_modo(m):
 
     n = contar_mapas_en_archivo(MAPAS_FILE)
     if n == 0:
-        messagebox.showerror("Error", "No se encontraron mapas válidos en 'mapas.txt'.")
+        messagebox.showerror("Error", "NO SE ENCONTRARON MAPAS VALIDOS EN MAPAS.TXT")
         return
 
-    idx = simpledialog.askinteger("Seleccionar mapa",
+    idx = simpledialog.askinteger("Seleccione mapa",
                                   f"Hay {n} mapas disponibles.\nElija el que quiere jugar (1..{n}):",
                                   minvalue=1, maxvalue=n, parent=root)
     if not idx:
@@ -440,7 +436,7 @@ def cargar_mapa_desde_txt(ruta, indice):
             elif v==7: goombas.append([r,c]); matriz[r][c]=0
 
     if not mario_ok:
-        messagebox.showerror("Error","El mapa no contiene Mario (valor 2).")
+        messagebox.showerror("Error","El mapa no contiene Mario (el valor 2). Añádalo antes de empezar. cómo pretende jugar?")
         return False
 
     ajustar_view_a_mario()
@@ -777,11 +773,11 @@ def ganar():
     if not juego_activo: return
     juego_activo = False
     detener_bucles()
-    nombre = simpledialog.askstring("¡Ganaste!", "Ingresa tu nombre:", parent=root)
+    nombre = simpledialog.askstring("QUE BUENA. Ganó", "Ingrese su nombre:", parent=root)
     if not nombre: nombre = "Anónimo"
     seg = (ahora_ms() - inicio_ms)//1000
     guardar_en_ranking(nombre, seg, rojos_tomados, movimientos)
-    mostrar_estadisticas("Gané", nombre)
+    mostrar_estadisticas("Ganador", nombre)
 
 '''
 entrada: nada
@@ -813,8 +809,8 @@ objetivo: sprite correcto de mario
 '''
 def sprite_para_mario():
     if es_estrella_activa() and verde_activo: return SPRITES["mario_mix"]
-    if es_estrella_activa():                  return SPRITES["mario_star"]
-    if verde_activo:                          return SPRITES["mario_verde"]
+    if es_estrella_activa():    return SPRITES["mario_star"]
+    if verde_activo:                     return SPRITES["mario_verde"]
     return SPRITES["mario"]
 
 '''
@@ -836,10 +832,10 @@ def dibujar_tablero():
                 canvas.create_image(x, y, image=SPRITES["wall"], anchor="nw")
             else:
                 canvas.create_image(x, y, image=SPRITES["ground"], anchor="nw")
-            if v == 3: canvas.create_image(x, y, image=SPRITES["mush_red"],   anchor="nw")
+            if v == 3: canvas.create_image(x, y, image=SPRITES["mush_red"],  anchor="nw")
             if v == 5: canvas.create_image(x, y, image=SPRITES["mush_green"], anchor="nw")
-            if v == 4: canvas.create_image(x, y, image=SPRITES["star"],       anchor="nw")
-            if v == 6: canvas.create_image(x, y, image=SPRITES["princess"],   anchor="nw")
+            if v == 4: canvas.create_image(x, y, image=SPRITES["star"],  anchor="nw")
+            if v == 6: canvas.create_image(x, y, image=SPRITES["princess"],  anchor="nw")
 
     for gr,gc in goombas:
         if r0 <= gr < r0+VIEW_F and c0 <= gc < c0+VIEW_C:
@@ -879,9 +875,9 @@ objetivo: mostrar datos y volver al menú
 '''
 def mostrar_estadisticas(resultado, nombre=None):
     if modo == "normal":
-        seg = (ahora_ms() - inicio_ms)//1000
+        seg = (ahora_ms()- inicio_ms)//1000
     else:
-        seg_trans = (ahora_ms() - inicio_ms)//1000
+        seg_trans = (ahora_ms() -inicio_ms)//1000
         seg = 180 if resultado=="Time's Up" else seg_trans
     messagebox.showinfo("Estadísticas", mostrar_estadísticas_texto(resultado, seg, nombre))
     mostrar_menu()
@@ -935,12 +931,12 @@ def ver_ranking():
     txt.config(state="disabled")
 
 # ====== binds ======
-root.bind("<Up>",    lambda e: intentar_mover(-1, 0))
-root.bind("<Down>",  lambda e: intentar_mover( 1, 0))
-root.bind("<Left>",  lambda e: intentar_mover( 0,-1))
+root.bind("<Up>", lambda e: intentar_mover(-1, 0))
+root.bind("<Down>", lambda e: intentar_mover( 1, 0))
+root.bind("<Left>", lambda e: intentar_mover( 0,-1))
 root.bind("<Right>", lambda e: intentar_mover( 0, 1))
-root.bind("<f>",     lambda e: activar_hongo_verde())
-root.bind("<F>",     lambda e: activar_hongo_verde())
+root.bind("<f>",  lambda e:  activar_hongo_verde())
+root.bind("<F>",   lambda e: activar_hongo_verde())
 
 # ====== run ======
 '''
