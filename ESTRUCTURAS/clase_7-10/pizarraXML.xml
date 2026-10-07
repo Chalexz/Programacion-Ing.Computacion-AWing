@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+    <to>Somebody</to>
+    <from>Somebody else</from>
+    <heading>Recordatorio</heading>
+    <body>Nos vemos el fin de semana.</body>
+</note>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<libro>
+    <titulo>El principito</titulo>
+    <autor>Antoine de Saint-Exupéry</autor>
+</libro>

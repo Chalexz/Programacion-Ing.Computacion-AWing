@@ -1,0 +1,38 @@
+body{
+    text-align: center;
+}
+
+table{
+    border: 3px solid rgb(161, 90, 123);
+    border-spacing: 5px;
+}
+
+.pinna{
+    width: 400px;
+    height: 200px;
+}
+
+td{
+    border: 5px solid rgb(127, 185, 115);
+}
+
+.odd{
+    margin-left: 40px;
+    color: red;
+
+}
+
+.even{
+
+    margin-left: 40px;
+    color: blue;
+}
+
+#final{
+    background-color: rgb(241, 225, 181);
+}
+
+li{
+    text-align: left;
+    margin-left: 40px;
+}

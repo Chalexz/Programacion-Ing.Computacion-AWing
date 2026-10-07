@@ -1,0 +1,13 @@
+{
+    "atributo": "valor",
+    "atributo2": "valor2",
+    "atributon": [
+        "elem1": "valor1",
+        "elem2": "valor2"
+    ],
+    {
+        "objeto1": {}
+        "objeto2": {}
+        "objetoN": {}
+    }
+}

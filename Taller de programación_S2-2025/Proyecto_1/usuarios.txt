@@ -1,2 +1,0 @@
-usuario;clave
-admin;1234

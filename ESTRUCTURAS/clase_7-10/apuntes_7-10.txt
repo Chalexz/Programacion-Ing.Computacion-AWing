@@ -1,0 +1,46 @@
+
+
+Se vio un ejemplo de .json. (JavaScript Object Notation) Viene de Javascript 
+///
+{
+    "atributo": "valor",
+    "atributo2": "valor2",
+    "atributon": [
+        "elem1": "valor1",
+        "elem2": "valor2"
+    ],
+    {
+        "objeto1": {}
+        "objeto2": {}
+        "objetoN": {}
+    }
+}
+///
+
+Se vio un ejemplo de YAML (.yaml) y se explicó
+
+///
+-atributo: valor,
+-atributo2: valor2,
+-atributon: 
+        -elem1: valor1,
+         elem2: valor2
+
+        -objeto1: {}
+        -objeto2: {}
+        -objetoN: {}
+-atributon+1: valorN
+///
+
+Se explicó qué es XML (Extensible Markup Language) y HTML (HyperText Markup Language)
+Se dio el ejemplo
+///
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+    <to>Somebody</to>
+    <from>Somebody else</from>
+    <heading>Recordatorio</heading>
+    <body>Nos vemos el fin de semana.</body>
+</note>
+///
+
